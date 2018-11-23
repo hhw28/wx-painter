@@ -1,0 +1,34 @@
+<view id="app">
+  <view class="canvas-wrapper">
+    <!-- Canvas的默认大小为300像素×150像素，请勿在CSS中设置初始宽高，会导致canvas画的图整体等比缩放 -->
+    <canvas bindtouchstart="touchStart"
+            bindtouchmove="touchMove"
+            bindtouchend="touchEnd"
+            canvas-id="canvas"
+            class="canvas"
+            disable-scroll="true"
+            style="width: {{width}}px; height: {{height}}px;">
+    </canvas>
+  </view>
+  <view class="panels">
+    <view id="actions" class="actions">
+      <icon bindtap="clickBrush" class="iconfont icon-brush {{eraserEnable ? '' : 'active' }}" id="brush"></icon>
+      <icon bindtap="clickEraser" class="iconfont icon-eraser {{eraserEnable ? 'active' : '' }}" id="eraser"></icon>
+      <icon bindtap="delete" class="iconfont icon-delete {{deleteImg ? 'active' : ''}}" id="del"></icon>
+      <icon bindtap="download" class="iconfont icon-download {{downloadImg ? 'active' : ''}}" id="download"></icon>
+    </view>
+    <radio-group class="palette">
+      <label class="palette-btn {{c.checked ? 'active' : ''}}"
+             wx:for="{{commonColors}}"
+             wx:for-index="index"
+             wx:key="index"
+             wx:for-item="c"
+             bindtap="checkColor"
+             data-color="{{c.value}}"
+             data-index="{{index}}"
+             style="background: {{c.value}}">
+        <radio value="{{c.value}}" />
+      </label>
+    </radio-group>
+  </view>
+</view>
