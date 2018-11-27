@@ -96,24 +96,6 @@ Page({
       }
     ],
   },
-
-  checkColor: function(e){
-    let color = e.currentTarget.dataset.color
-    let index = e.currentTarget.dataset.index
-    this.setData({
-      color: color
-    })
-
-    this.data.commonColors.forEach((item, index) => {
-      this.setData({
-        [`commonColors[${index}].checked`]: false
-      })
-    })
-    this.setData({
-      [`commonColors[${index}].checked`]: true
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -151,11 +133,11 @@ Page({
     if(this.data.eraserEnable){
       ctx.clearRect(x-5, y-5, 10, 10)
       ctx.draw(true)
-    }else{
-      this.setData({
-        lastPoint: {x:x, y:y}
-      })
     }
+    this.setData({
+      lastPoint: {x:x, y:y}
+    })
+    
   },
   touchMove(e){
     let x = e.touches[0].x
@@ -164,12 +146,7 @@ Page({
     let ctx = wx.createCanvasContext('canvas')
 
     if(!this.data.isUse){ return }
-    // if(this.data.eraserEnable){
-    //   this.setData({
-    //     color: '#fff',
-    //     brushSize: 7
-    //   })
-    // }
+
     this.drawLine(this.data.lastPoint.x, this.data.lastPoint.y, newPoint.x, newPoint.y)
     this.setData({
       lastPoint: newPoint
@@ -208,6 +185,30 @@ Page({
       color: '#fff',
       brushSize: 7,
       lastColor: this.data.lastColor,
+    })
+  },
+  // 切换画笔颜色
+  checkColor: function (e) {
+    let color = e.currentTarget.dataset.color
+    let index = e.currentTarget.dataset.index
+
+    if (this.data.eraserEnable) {
+      this.setData({
+        lastColor: color,
+      })
+    } else {
+      this.setData({
+        color: color
+      })
+    }
+
+    this.data.commonColors.forEach((item, index) => {
+      this.setData({
+        [`commonColors[${index}].checked`]: false
+      })
+    })
+    this.setData({
+      [`commonColors[${index}].checked`]: true
     })
   },
   // 删除图像
