@@ -3,6 +3,9 @@
   height: 100vh;
   position: relative;
 }
+.canvas-wrapper{
+
+}
 .panels{
   position: absolute;
   bottom: 20rpx;

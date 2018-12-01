@@ -256,7 +256,6 @@ Page({
                   key:"scope",
                   data:"true"
                 })
-                console.log('开始缓存')
               }
             })
           }

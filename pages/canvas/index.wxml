@@ -7,7 +7,7 @@
             canvas-id="canvas"
             class="canvas"
             disable-scroll="true"
-            style="width: {{width}}px; height: {{height}}px;">
+            style="width: {{width}}px; height: {{height - 130}}px;">
     </canvas>
   </view>
   <view class="panels">
